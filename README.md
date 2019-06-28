@@ -1,29 +1,28 @@
-# musicplayer
+# musicplayer 实战项目 音乐播放器
 
-## Project setup
+## Project setup 初始化
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development 运行
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compiles and minifies for production 打包
+
 ```
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
+# 制作步骤和心得
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 2019/6/27
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 今天整理了项目
+- 项目当前功能，播放音乐，根据歌词文件加载歌词
+- 歌曲播放完毕后，暂停播放
+- 播放的黑胶唱片中间加上了专辑的图片，并且能跟随唱片旋转

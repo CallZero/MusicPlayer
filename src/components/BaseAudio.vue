@@ -17,7 +17,9 @@ export default {
       srcStr: srcstr
     };
   },
-
+  created() {
+    console.log("created");
+  },
   watch: {
     isPlay: function() {
       if (this.$store.state.isplay) {

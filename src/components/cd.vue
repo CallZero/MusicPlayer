@@ -1,21 +1,29 @@
 <template>
   <div>
-    <img :class="[this.$store.state.isplay==true?'ctPlay':'ctPause']" src="../assets/citou.png">
-    <img
-      :class="[this.$store.state.isplay==true?'cdPlay':'cdPause']"
-      class="cd"
-      src="../assets/timg.png"
-    >
+    <img :class="[this.$store.state.isplay==true?'ctPlay':'ctPause']" src="../assets/citou2.png">
+    <div>
+      <img
+        :class="[this.$store.state.isplay==true?'cdPlay':'cdPause']"
+        class="cd"
+        src="../assets/timg2.png"
+      >
+      <img
+        src="../assets/wmc.jpg"
+        :class="[this.$store.state.isplay==true?'cdPlay':'cdPause']"
+        class="cd2"
+        alt
+      >
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {}
+    return {};
   },
   components: {}
-}
+};
 </script>
 
 
@@ -28,11 +36,23 @@ export default {
   animation-play-state: running !important;
 }
 
+img {
+}
+
 .cd {
   width: 70%;
   margin-left: 15%;
-  margin-top: 50px;
+  margin-top: 60%-50px;
   animation: cd 5s infinite linear;
+}
+
+.cd2 {
+  width: 30%;
+  left: 35%;
+  margin-top: 60%-32px;
+  border-radius: 50%;
+  animation: cd 5s infinite linear;
+  position: absolute;
 }
 
 @keyframes cd {
@@ -52,13 +72,15 @@ export default {
   animation: 1s;
   animation: ctPause 1s linear;
   margin-left: 50-23%;
+  transform: rotate(10deg);
+  transform-origin: 90% 5%;
 }
 
 .ctPause {
   width: 23%;
   z-index: 100;
   position: absolute;
-  transform: rotate(45deg);
+  transform: rotate(40deg);
   transform-origin: 90% 5%;
   animation: ctPlay 1s linear;
   margin-left: 50-23%;
@@ -66,24 +88,24 @@ export default {
 
 @keyframes ctPlay {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(10deg);
     transform-origin: 90% 5%;
   }
 
   100% {
-    transform: rotate(45deg);
+    transform: rotate(40deg);
     transform-origin: 90% 5%;
   }
 }
 
 @keyframes ctPause {
   0% {
-    transform: rotate(45deg);
+    transform: rotate(40deg);
     transform-origin: 90% 5%;
   }
 
   100% {
-    transform: rotate(0deg);
+    transform: rotate(10deg);
     transform-origin: 90% 5%;
   }
 }
