@@ -11,77 +11,72 @@
 </template>
 
 <script>
-import Lrc from '../assets/5244915.json'
-import { log } from 'util'
+import httpsequest from "../js/HttpRequest";
+
 export default {
   data() {
     return {
       index: 0,
       top: 0,
-      lrc: Lrc.lrc.lyric,
-      date: []
-    }
+      lrc: "",
+      date: [],
+      lrcUrl: "http://127.0.0.1:3001/lrc/学猫叫.json"
+    };
   },
+  methods: {},
   created() {
-    console.log(this.lrc)
-    let str = this.lrc.split('\n')
-
-    let msg = []
-    let ii = 0
-
-    str.forEach(e => {
-      if (e != null) {
-        let str = e.replace(/\[.*?\]/g, '')
-        let t = e.match(/\[(.+?)\]/g)
-        if (t != null)
-          t.forEach(ee => {
-            if (ee != null) {
-              let s = ee.replace(/\[|]/g, '')
-              let s2 = s.split(':')
-              let time1 = parseInt(s2[0]) * 60 + parseInt(s2[1])
-              let obj = new Object()
-              obj.time1 = time1
-              obj.time2 = time1
-              obj.str = str
-              msg.push(obj)
-            }
-          })
-      }
-    })
-
-    let obj = new Object()
-    obj.time1 = 9999
-    obj.time2 = 10000
-    obj.str = ''
-    msg.push(obj)
-
-    function sortId(a, b) {
-      return a.time1 - b.time1
-    }
-
-    msg.sort(sortId)
-
-    let time22 = null
-
-    for (let i = msg.length - 2; i >= 0; i--) {
-      msg[i].time2 = msg[i + 1].time1
-      msg[i].id = i
-    }
-
-    msg[msg.length - 1].time2 = 9999
-
-    console.log(this.date)
-
-    this.date = msg
-
-    console.log(this.date)
+    this.axios
+      .get(this.lrcUrl)
+      .then(response => {
+        console.log(response.data.lrc.lyric);
+        this.lrc = response.data.lrc.lyric;
+        let str = this.lrc.split("\n");
+        let msg = [];
+        str.forEach(e => {
+          if (e != null) {
+            let str = e.replace(/\[.*?\]/g, "");
+            let t = e.match(/\[(.+?)\]/g);
+            if (t != null)
+              t.forEach(ee => {
+                if (ee != null) {
+                  let s = ee.replace(/\[|]/g, "");
+                  let s2 = s.split(":");
+                  let time1 = parseInt(s2[0]) * 60 + parseInt(s2[1]);
+                  let obj = new Object();
+                  obj.time1 = time1;
+                  obj.time2 = time1;
+                  obj.str = str;
+                  msg.push(obj);
+                }
+              });
+          }
+        });
+        let obj = new Object();
+        obj.time1 = 9999;
+        obj.time2 = 10000;
+        obj.str = "";
+        msg.push(obj);
+        function sortId(a, b) {
+          return a.time1 - b.time1;
+        }
+        msg.sort(sortId);
+        for (let i = msg.length - 2; i >= 0; i--) {
+          msg[i].time2 = msg[i + 1].time1;
+          msg[i].id = i;
+        }
+        msg[msg.length - 1].time2 = 9999;
+        this.date = msg;
+      })
+      .catch(response => {
+        console.log(response);
+      });
   },
   watch: {
     time: function() {
-      let t = this.$store.state.shijian
+      let t = this.$store.state.shijian;
       for (let i = 0; i < this.date.length; i++) {
         if (t >= this.date[i].time1 && t < this.date[i].time2) {
-          this.index = i
+          this.index = i;
         }
       }
       this.top =
@@ -90,16 +85,16 @@ export default {
             ((t - this.date[this.index].time1) /
               (this.date[this.index].time2 - this.date[this.index].time1)) *
               30
-          : 0
-      console.log(this.index)
+          : 0;
+      console.log(this.index);
     }
   },
   computed: {
     time: function() {
-      return this.$store.state.shijian
+      return this.$store.state.shijian;
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

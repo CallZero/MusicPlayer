@@ -7,14 +7,12 @@
 </template> 
 
 <script>
-import srcstr from "../assets/学猫叫.mp3";
 export default {
   data() {
     return {
       time: 0,
       setTime: null,
-      //srcStr: "http://127.0.0.1:3000/music/xmj.mp3"
-      srcStr: srcstr
+      srcStr: "http://127.0.0.1:3001/music/学猫叫.mp3"
     };
   },
   created() {
