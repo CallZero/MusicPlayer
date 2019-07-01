@@ -2,14 +2,17 @@
   <div>
     <div class="playerMain">
       <div>
+        <!-- 显示当前播放音频的时间 -->
         <span>{{ismove?time2:time}}</span>
       </div>
       <div>
+        <!-- 监测鼠标拖拽动作 -->
         <div @click="clidked" @touchmove="touchmove" @touchend="touchend ">
           <div ref="div1">
+            <!-- 根据jindu变量控制进度条的比例 -->
             <div :style="{width:jindu+'%'}">
               <div></div>
-              <div @touchstart="touchstart"></div>
+              <div @touchstart="touchstart" :class="{blockBig:ismove&&this.$store.state.isplay}"></div>
             </div>
           </div>
         </div>
@@ -22,106 +25,131 @@
           <span @click="Next" class="icon iconfont">&#xe674;</span>
         </div>
         <div @click="playOrpause">
+          <!-- 根据isPlay判断是否是播放状态，并根据播放状态切换显示播放或暂停的图标 -->
           <span class="icon iconfont" v-show="this.$store.state.isplay==false">&#xe66a;</span>
           <span class="icon iconfont" v-show="this.$store.state.isplay">&#xe677;</span>
         </div>
         <div>
+          <!-- 随机播放图标 -->
           <span @click="Last" class="icon iconfont">&#xe670;</span>
         </div>
       </div>
     </div>
+    <!-- 音乐播放控件 -->
+    <baseAudio :AudioSrc="AudioSrc"></baseAudio>
   </div>
 </template>
  
 <script>
-import '../assets/icon/iconfont.css'
+import baseAudio from "./BaseAudio";
+import "../assets/icon/iconfont.css";
 export default {
+  props: ["AudioSrc"],
   data() {
     return {
       left: null,
       Maxlength: null,
       ismove: false,
-      time2: ''
-    }
+      time2: ""
+    };
   },
   methods: {
     playOrpause() {
-      this.setplay(!this.$store.state.isplay)
-      console.log('isPlay=' + this.$store.state.isplay)
+      this.setplay(!this.$store.state.isplay);
+      console.log("isPlay=" + this.$store.state.isplay);
     },
     Next() {
-      console.log('next')
+      console.log("next");
     },
     Last() {
-      console.log('last')
+      console.log("last");
     },
     setplay(value) {
-      this.$store.dispatch('setPlayFun', value)
+      this.$store.dispatch("setPlayFun", value);
     },
     clidked(e) {
-      console.log('clidked')
+      console.log("clidked");
       if (this.$store.state.isplay) {
-        if (this.left == null) this.left = this.getX(this.$refs.div1)
-        if (this.Maxlength == null) this.Maxlength = this.$refs.div1.clientWidth
-        e = e || window.event
-        var movex = e.pageX
-        this.$store.dispatch('settimeFun', (movex - this.left) / this.Maxlength)
+        if (this.left == null) this.left = this.getX(this.$refs.div1);
+        if (this.Maxlength == null)
+          this.Maxlength = this.$refs.div1.clientWidth;
+        e = e || window.event;
+        var movex = e.pageX;
+        this.$store.dispatch(
+          "settimeFun",
+          (movex - this.left) / this.Maxlength
+        );
       }
     },
     touchstart() {
-      this.ismove = true
-      this.$store.dispatch('setjindulockFun', 1)
+      this.ismove = true;
+      this.$store.dispatch("setjindulockFun", 1);
     },
     touchend(e) {
-      this.ismove = false
-      e = e || window.event
+      this.ismove = false;
+      e = e || window.event;
 
-      var movex = e.changedTouches[0].pageX
-      this.$store.dispatch('settimeFun', (movex - this.left) / this.Maxlength)
+      var movex = e.changedTouches[0].pageX;
+      this.$store.dispatch("settimeFun", (movex - this.left) / this.Maxlength);
 
-      console.log((movex - this.left) / this.Maxlength / 100)
-      this.ismove = false
-      this.$store.dispatch('setjindulockFun', 0)
+      console.log((movex - this.left) / this.Maxlength / 100);
+      this.ismove = false;
+      this.$store.dispatch("setjindulockFun", 0);
     },
     touchmove(e) {
       if (this.$store.state.isplay && this.ismove) {
-        if (this.left == null) this.left = this.getX(this.$refs.div1)
-        if (this.Maxlength == null) this.Maxlength = this.$refs.div1.clientWidth
-        e = e || window.event
+        if (this.left == null) this.left = this.getX(this.$refs.div1);
+        if (this.Maxlength == null)
+          this.Maxlength = this.$refs.div1.clientWidth;
+        e = e || window.event;
 
-        var movex = e.targetTouches[0].pageX
+        var movex = e.targetTouches[0].pageX;
         this.$store.dispatch(
-          'setjinduFun',
+          "setjinduFun",
           ((movex - this.left) / this.Maxlength) * 100
-        )
+        );
 
         let t =
-          ((movex - this.left) / this.Maxlength) * this.$store.state.alltime
+          ((movex - this.left) / this.Maxlength) * this.$store.state.alltime;
         this.time2 =
-          parseInt(t / 60) + ':' + ('0' + parseInt(t % 60)).substr(-2)
+          parseInt(t / 60) + ":" + ("0" + parseInt(t % 60)).substr(-2);
       }
     },
     getX(obj) {
       return (
         obj.offsetLeft +
         (obj.offsetParent ? this.getX(obj.offsetParent) : obj.x ? obj.x : 0)
-      )
+      );
     }
   },
   computed: {
     jindu: function() {
-      return 5 + (95 * this.$store.state.jindu) / 100
+      return 5 + (95 * this.$store.state.jindu) / 100;
     },
     time: function() {
-      let t = this.$store.state.shijian
-      return parseInt(t / 60) + ':' + ('0' + parseInt(t % 60)).substr(-2)
+      let t = this.$store.state.shijian;
+      return parseInt(t / 60) + ":" + ("0" + parseInt(t % 60)).substr(-2);
     }
   },
-  watch: {}
-}
+  watch: {},
+  components: {
+    baseAudio
+  }
+};
 </script>
 
 <style lang="less" scoped>
+.blockBig {
+  width: 20px !important;
+  float: left !important;
+  margin-left: -20px !important;
+  height: 15px !important;
+  margin-top: -7.5px !important;
+  background: #063fdf !important;
+  box-sizing: border-box !important;
+  border: 1px solid #000 !important;
+}
+
 .playerMain {
   position: absolute;
   width: 96%;
@@ -163,7 +191,7 @@ export default {
             margin-left: -20px;
             height: 10px;
             margin-top: -2.5px;
-            background: #ffffff;
+            background: #db1212;
             box-sizing: border-box;
             border: 1px solid #000;
           }

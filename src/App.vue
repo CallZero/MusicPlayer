@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <Phonevideo></Phonevideo>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Phonevideo from './components/Phonevideo'
 export default {
-  name: 'App',
-  components: {
-    Phonevideo
-  }
-}
+  name: "App"
+};
 </script>
 
 <style>

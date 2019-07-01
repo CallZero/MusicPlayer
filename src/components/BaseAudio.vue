@@ -1,18 +1,21 @@
 <template>
+  <!-- 最基础的音乐播放控件，没有界面，
+  1、监听xuex中的isplay判断是否播放，
+  2、监听xuex中的playtime自动设置播放进度-->
   <div>
     <audio ref="audio" controls="controls">
-      <source :src="srcStr" type="audio/mp3">
+      <source :src="AudioSrc" type="audio/mp3" />
     </audio>
   </div>
 </template> 
 
 <script>
 export default {
+  props: ["AudioSrc"],
   data() {
     return {
       time: 0,
-      setTime: null,
-      srcStr: "http://127.0.0.1:3001/music/学猫叫.mp3"
+      setTime: null
     };
   },
   created() {

@@ -1,18 +1,18 @@
 <template>
   <div>
-    <img :class="[this.$store.state.isplay==true?'ctPlay':'ctPause']" src="../assets/citou2.png">
+    <img :class="[this.$store.state.isplay==true?'ctPlay':'ctPause']" src="../assets/citou2.png" />
     <div>
       <img
         :class="[this.$store.state.isplay==true?'cdPlay':'cdPause']"
         class="cd"
         src="../assets/timg2.png"
-      >
+      />
       <img
         src="../assets/wmc.jpg"
         :class="[this.$store.state.isplay==true?'cdPlay':'cdPause']"
         class="cd2"
         alt
-      >
+      />
     </div>
   </div>
 </template>
@@ -34,9 +34,6 @@ export default {
 
 .cdPlay {
   animation-play-state: running !important;
-}
-
-img {
 }
 
 .cd {

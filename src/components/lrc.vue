@@ -1,4 +1,5 @@
 <template>
+  <!-- 一个div块，能够根据传来的url地址读取歌词文件，并根据全局播放时间设置歌词的位置 -->
   <div class="bg">
     <div :style="{'margin-top':'-'+top+'px'}">
       <span
@@ -11,24 +12,21 @@
 </template>
 
 <script>
-import httpsequest from "../js/HttpRequest";
-
 export default {
+  props: ["LrcUrl"],
   data() {
     return {
       index: 0,
       top: 0,
       lrc: "",
-      date: [],
-      lrcUrl: "http://127.0.0.1:3001/lrc/学猫叫.json"
+      date: []
     };
   },
   methods: {},
   created() {
     this.axios
-      .get(this.lrcUrl)
+      .get(this.LrcUrl)
       .then(response => {
-        console.log(response.data.lrc.lyric);
         this.lrc = response.data.lrc.lyric;
         let str = this.lrc.split("\n");
         let msg = [];
@@ -67,9 +65,7 @@ export default {
         msg[msg.length - 1].time2 = 9999;
         this.date = msg;
       })
-      .catch(response => {
-        console.log(response);
-      });
+      .catch();
   },
   watch: {
     time: function() {
@@ -86,7 +82,6 @@ export default {
               (this.date[this.index].time2 - this.date[this.index].time1)) *
               30
           : 0;
-      console.log(this.index);
     }
   },
   computed: {
