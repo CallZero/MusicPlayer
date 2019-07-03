@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- 头 -->
-    <Mhead></Mhead>
     <!-- 轮播框 -->
     <lunbo></lunbo>
     <!-- 推荐歌单 -->
