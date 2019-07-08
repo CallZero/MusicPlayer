@@ -3,8 +3,8 @@
   1、监听xuex中的isplay判断是否播放，
   2、监听xuex中的playtime自动设置播放进度-->
   <div>
-    <audio ref="audio" controls="controls">
-      <source :src="AudioSrc" type="audio/mp3" />
+    <audio ref="audio" controls="controls" @oncanplay="Oncanplay">
+      <source :src="AudioSrc" type="audio/mpeg" />
     </audio>
   </div>
 </template> 
@@ -19,7 +19,12 @@ export default {
     };
   },
   created() {
-    console.log("created");
+    setTimeout(() => {
+      this.$store.dispatch("initPlay");
+    }, 1000);
+  },
+  methods: {
+    Oncanplay() {}
   },
   watch: {
     isPlay: function() {

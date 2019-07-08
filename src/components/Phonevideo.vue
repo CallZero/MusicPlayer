@@ -15,9 +15,13 @@ export default {
   data() {
     return {
       msg: "video view3234",
-      lrcUrl: "http://127.0.0.1:3001/lrc/学猫叫.json",
-      audioSrc: "http://127.0.0.1:3001/music/学猫叫.mp3"
+      lrcUrl: "",
+      audioSrc: ""
     };
+  },
+  created() {
+    this.lrcUrl = this.$route.query.lrcAddress;
+    this.audioSrc = this.$route.query.musAddress;
   },
   components: {
     PlayUI,

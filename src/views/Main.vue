@@ -29,10 +29,19 @@ export default {
       }
     };
   },
+  created() {
+    let routePath = this.$route.path;
+    if (routePath === "/Main/home") {
+      this.selested = 0;
+    } else if (routePath === "/Main/Liest") {
+      this.selested = 1;
+    } else {
+      this.selested = 2;
+    }
+  },
   methods: {
     setSelected(index) {
       this.selested = index;
-      console.log(this.selested);
     }
   },
   components: { Mhead }

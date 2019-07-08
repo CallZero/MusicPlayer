@@ -1,16 +1,13 @@
 <template>
-  <!-- 轮播图 -->
-  <div class="lunbo">
-    <img v-for="item in imgList" :key="item" :src="item.img" />
+  <div>
+    <!-- 轮播图 -->
+    <div class="lunbo">
+      <img src="../assets/1.jpg" />
+    </div>
   </div>
 </template>
 
 <script>
-import img1 from "../assets/1.jpg";
-import img2 from "../assets/2.jpg";
-import img3 from "../assets/3.jpg";
-import img4 from "../assets/4.jpg";
-import img5 from "../assets/5.jpg";
 export default {
   data() {
     return {
@@ -18,13 +15,7 @@ export default {
     };
   },
   created() {
-    this.imgList = [
-      { img: img1 },
-      { img: img2 },
-      { img: img3 },
-      { img: img4 },
-      { img: img5 }
-    ];
+    this.imgList = [];
   },
   components: {}
 };
@@ -32,14 +23,17 @@ export default {
 
 <style  lang='less' scoped>
 .lunbo {
-  width: 100%;
+  width: 350px;
   height: 150px;
+  margin: 0 auto;
   overflow-x: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   img {
     float: left;
     white-space: nowrap;
-    width: 100%;
+    width: 350px;
     display: block;
     flex-direction: column-reverse;
   }

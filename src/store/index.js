@@ -54,6 +54,14 @@ const store = new vuex.Store({
     setalltimeFun(context, value) {
       context.commit("setalltime", value);
     },
+    initPlay(context) {
+      context.commit("setjindu", 0);
+      context.commit("setshijian", 0);
+      context.commit("settime", 0);
+      context.commit("setjindulock", 0);
+      context.commit("setalltime", 0);
+      context.commit("setplay", true);
+    }
   }
 });
 

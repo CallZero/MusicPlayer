@@ -1,13 +1,17 @@
 <template>
-  <div>推荐歌曲</div>
+  <div>
+    <!-- 推荐歌单 -->
+    <musicList></musicList>
+  </div>
 </template>
 
 <script>
+import musicList from "../components/MusicList";
 export default {
   data() {
     return {};
   },
-  components: {}
+  components: { musicList }
 };
 </script>
 

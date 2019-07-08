@@ -18,6 +18,7 @@
         </div>
       </div>
       <div>
+        <!-- 随机播放图标 -->
         <div>
           <span class="icon iconfont">&#xe672;</span>
         </div>
@@ -30,8 +31,10 @@
           <span class="icon iconfont" v-show="this.$store.state.isplay">&#xe677;</span>
         </div>
         <div>
-          <!-- 随机播放图标 -->
           <span @click="Last" class="icon iconfont">&#xe670;</span>
+        </div>
+        <div @click="back">
+          <span class="icon iconfont">返</span>
         </div>
       </div>
     </div>
@@ -53,7 +56,14 @@ export default {
       time2: ""
     };
   },
+  created() {
+    //this.setplay(true);
+  },
   methods: {
+    back() {
+      javascript: history.go(-1);
+      this.setplay(false);
+    },
     playOrpause() {
       this.setplay(!this.$store.state.isplay);
       console.log("isPlay=" + this.$store.state.isplay);

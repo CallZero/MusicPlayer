@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 轮播框 -->
-    <lunbo></lunbo>
+    <lunbo imgUrl="..."></lunbo>
     <!-- 推荐歌单 -->
     <musicBlock></musicBlock>
     <!-- 推荐歌曲列表 -->
