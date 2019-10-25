@@ -1,23 +1,5 @@
 # musicplayer 实战项目 音乐播放器
 
-## Project setup 初始化
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development 运行
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production 打包
-
-```
-npm run build
-```
-
 # 制作步骤和心得
 
 ## 2019/6/27
@@ -31,7 +13,7 @@ npm run build
 
 - 重新构思了下播放器，决定从新写，只保留控件部分，界面重新开始做
 
-##2019/7/3
+## 2019/7/3
 
 - 重新开始做首页
 
@@ -39,3 +21,4 @@ npm run build
 
 - 开始重新写
 - 前后台都在这个项目里
+- 重新整理的项目目录

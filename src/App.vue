@@ -6,8 +6,7 @@
 
 <script>
 export default {
-  name: "App",
-  isPhone: false
+  name: "App"
 };
 </script>
 
